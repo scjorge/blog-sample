@@ -42,7 +42,7 @@ class Post(Base):
         
 
 class KeyWord(Base):
-    keyword = models.CharField(db_column="ds_keyword", max_length=50, unique=True)
+    name = models.CharField(db_column="ds_keyword", max_length=50, unique=True)
 
     class Meta:
         db_table = "tb_keywords"
@@ -50,4 +50,4 @@ class KeyWord(Base):
         verbose_name_plural = "KeyWords"
 
     def __str__(self):
-        return str(self.keyword)
+        return str(self.keyword_set)

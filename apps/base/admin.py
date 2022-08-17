@@ -32,10 +32,10 @@ class AdminKeyWords(admin.ModelAdmin):
 
     list_display = [
         'id',
-        'keyword',
+        'name',
     ]
 
     fields = [
-        'keyword',
+        'name',
         'updated',
     ]
