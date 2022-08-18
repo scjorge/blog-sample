@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Post, KeyWord
+from apps.base.models import Post, KeyWord
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -23,7 +23,6 @@ class PostSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        print(validated_data, "----------", self.context)
         keyword_data = validated_data.pop("keyword")
         mapping_keyword = list(map(lambda x: dict(x), keyword_data))
 
