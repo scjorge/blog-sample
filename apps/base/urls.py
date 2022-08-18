@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .viewsets import CreatePost1
+from .viewsets import ListCreatePost, RetriveUpdatePost
 
 urlpatterns = [
-    path('create/', CreatePost1.as_view(), name="create_post"),
+    path('posts/', ListCreatePost.as_view(), name="create_post"),
+    path('posts/<int:pk>/', RetriveUpdatePost.as_view(), name="create_post"),
 ]

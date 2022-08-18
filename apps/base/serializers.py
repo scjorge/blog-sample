@@ -5,44 +5,45 @@ from .models import Post, KeyWord
 
 
 class PostSerializer(serializers.ModelSerializer):
+
+    class KeyWordSerializer2(serializers.Serializer):
+        name = serializers.CharField()
+
+
+    keyword = KeyWordSerializer2(many=True)
+
     class Meta:
         model = Post
         fields = [
+            "id",
             "title",
             "subtitle",
             "type_post",
             "content",
             "status",
+            "keyword",
         ]
-        
+    
 
+    def create(self, validated_data):
+        keyword_data = validated_data.pop('keyword')
+        mapping_keyword = list(map(lambda x: dict(x), keyword_data))
 
-class KeyWordSerializer1(serializers.ModelSerializer):
-    class Meta:
-        model = KeyWord
-        fields = [
-            "name",
-        ]
+        post = Post.objects.create(title=validated_data['title'],
+                                    subtitle=validated_data['subtitle'],
+                                    type_post=validated_data['type_post'],
+                                    content=validated_data['content'],
+                                    status=validated_data['status'],)
+        keywords_list = []
+        for item in mapping_keyword:
+            k, _ = KeyWord.objects.get_or_create(name=item['name'])
+            keywords_list.append(k.id)
 
+        for k in keywords_list:
+            post.keyword.add(k)
+        return post
 
-class KeyWordSerializer(serializers.Serializer):
-    name = serializers.CharField()
-
-    def validate_keyword_set_format(self, keyword):
-        if not isinstance(keyword, dict):
-            raise ValidationError({"errors":"List must be contain a JSON with 'name' as Keys"})
-
-        if not "name" in keyword.keys():
-            raise ValidationError({"errors":"List must be contain a JSON with 'name' as Keys"})
-
-        if not isinstance(keyword["name"], str):
-            raise ValidationError({"errors":"List must be contain a JSON with sting values"})
-
-        return keyword
-
-
-    def validate_keyworda_set(self, keyword):
-        keyword = list(filter(self.validate_keyword_set_format, keyword))
-        if len(keyword) == 0:
-            raise ValidationError({"errors":"List must be contain a JSON with 'name' as Keys"})
-        return keyword
+    
+    def update(self, instance, validated_data):
+        print("kkkkkkkkkk")
+        return super().update(instance, validated_data)

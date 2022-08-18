@@ -50,4 +50,4 @@ class KeyWord(Base):
         verbose_name_plural = "KeyWords"
 
     def __str__(self):
-        return str(self.keyword_set)
+        return str(self.name)

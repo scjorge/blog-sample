@@ -33,5 +33,5 @@ urlpatterns += [
 
 #apps
 urlpatterns += [
-    path('posts/', include(base_urls)),
+    path('blog/', include(base_urls)),
 ]
