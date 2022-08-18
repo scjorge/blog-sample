@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ftl&2t__vf3x82be0=%+$j@6%y&!9_hldka$+u2kn8jwe94)04'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://blog-samplemed.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'https://blog-samplemed.herokuapp.com/']
 
 
 # Application definition
@@ -86,14 +86,17 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST':'ec2-34-234-240-121.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'NAME': 'd2349qj8jrla1d',
+        'USER': 'luqlfzmgfijfvl',
+        'PASSWORD':'04e41a894c5c92dadab2651f4e68da2342f9a68144a67591b36af87049ba5e25',
 
+    },
+}
 
 
 # Redis Cache
