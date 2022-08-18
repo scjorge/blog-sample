@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class UserProfile(AbstractUser):
-
     class Meta(AbstractUser.Meta):
         db_table = "tb_user"
         verbose_name = "User"

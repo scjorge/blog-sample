@@ -12,25 +12,15 @@ class Base(models.Model):
 
 class Post(Base):
     title = models.CharField(
-        db_column="ds_title", 
-        max_length=100, 
-        null=False, 
-        blank=False
+        db_column="ds_title", max_length=100, null=False, blank=False
     )
     subtitle = models.CharField(
-        db_column="ds_subtitle", 
-        max_length=100, 
-        null=False, 
-        blank=False
+        db_column="ds_subtitle", max_length=100, null=False, blank=False
     )
     type_post = models.IntegerField(db_column="in_type", null=False, blank=False)
     content = models.TextField(db_column="tx_content", null=False, blank=False)
     status = models.IntegerField(db_column="in_status", null=False, blank=False)
-    keyword = models.ManyToManyField(
-        db_column="ds_keyword", 
-        to="KeyWord", 
-        blank=False
-    )
+    keyword = models.ManyToManyField(db_column="ds_keyword", to="KeyWord", blank=False)
 
     class Meta:
         db_table = "tb_post"
@@ -39,7 +29,7 @@ class Post(Base):
 
     def __str__(self):
         return str(self.title[:15])
-        
+
 
 class KeyWord(Base):
     name = models.CharField(db_column="ds_keyword", max_length=50, unique=True)
