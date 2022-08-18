@@ -4,6 +4,7 @@ from .models import Post, KeyWord
 
 
 class PostSerializer(serializers.ModelSerializer):
+
     class KeyWordSerializer2(serializers.Serializer):
         name = serializers.CharField()
 
@@ -22,6 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        print(validated_data, "----------", self.context)
         keyword_data = validated_data.pop("keyword")
         mapping_keyword = list(map(lambda x: dict(x), keyword_data))
 
@@ -31,6 +33,7 @@ class PostSerializer(serializers.ModelSerializer):
             type_post=validated_data["type_post"],
             content=validated_data["content"],
             status=validated_data["status"],
+            user=self.context['request'].user
         )
         keywords_list = []
         for item in mapping_keyword:
