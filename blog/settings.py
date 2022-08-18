@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -139,6 +140,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Default User model
 AUTH_USER_MODEL = 'user.UserProfile'
 
+#Logging
+LOG_DIR = os.path.join(BASE_DIR, "log")
+LOG_FILE = os.path.join(LOG_DIR, "blog.log") #on production /var/log/blog.log
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'loggers': {
+            'django': {
+                'handlers': ['blog'],
+                'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+                'propagate': False,
+            },
+        },
+        'handlers': {
+            'blog' : {
+                'level' : 'INFO',
+                'class' : 'logging.handlers.RotatingFileHandler',
+                'filename' : LOG_FILE,
+                'backupCount' : 10,
+                'formatter' : 'standard',
+            },
+        },
+        'formatters' : {
+            'standard' : {
+                'format' : '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+            },
+        },
+}
 
 # Rest Framwork
 REST_FRAMEWORK = {

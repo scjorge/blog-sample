@@ -1,0 +1,2 @@
+2022-08-18 00:00:30,011 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2022-08-18 00:00:56,298 [INFO] django.utils.autoreload: C:\Dev\blog\blog-sample\blog\settings.py changed, reloading.
