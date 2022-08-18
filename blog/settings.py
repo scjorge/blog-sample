@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-ftl&2t__vf3x82be0=%+$j@6%y&!9_hldka$+u2kn8jwe94)04
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://blog-samplemed.herokuapp.com/']
 
 
 # Application definition
