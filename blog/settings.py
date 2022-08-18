@@ -237,4 +237,5 @@ SWAGGER_SETTINGS = {
 }
 
 #Django Heroku
+DISABLE_COLLECTSTATIC=1
 django_heroku.settings(locals())
